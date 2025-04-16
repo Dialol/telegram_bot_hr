@@ -1,0 +1,7 @@
+aiogram
+asyncpg
+SQLAlchemy[asyncio]
+alembic
+python-dotenv
+apscheduler
+pydantic

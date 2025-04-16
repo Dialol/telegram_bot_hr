@@ -1,0 +1,24 @@
+# Виртуальное окружение
+.venv/
+
+# Python кэш и компилированные файлы
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Конфиденциальные данные
+.env
+
+# PostgreSQL данные (если используете Docker)
+postgres-data/
+
+# Логи
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Временные файлы
+.pytest_cache/
+.coverage

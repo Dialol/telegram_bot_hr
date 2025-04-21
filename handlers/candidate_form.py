@@ -2,12 +2,15 @@
 Обработчики для формы анкеты кандидата.
 """
 from datetime import datetime
-from aiogram import Router, F
+
+from aiogram import Router, F, Bot
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
 
 from keyboards.candidate_kb import get_shift_keyboard
 from utils.states import CandidateForm
+from utils.notifications import notify_managers_about_new_candidate
+from services.manager import get_all_managers
 from db import get_session
 from services.candidate import create_candidate
 
@@ -159,7 +162,7 @@ async def process_experience(message: Message, state: FSMContext) -> None:
 
 
 @router.message(CandidateForm.motivation)
-async def process_motivation(message: Message, state: FSMContext) -> None:
+async def process_motivation(message: Message, state: FSMContext, bot: Bot) -> None:
     """
     Обработчик для получения мотивации кандидата.
     Финальный шаг анкеты.
@@ -182,7 +185,13 @@ async def process_motivation(message: Message, state: FSMContext) -> None:
                 experience=form_data["experience"],
                 motivation=form_data["motivation"],
                 ) 
-        
+
+        managers = await get_all_managers(session)
+        managers_ids = [manager.telegram_id for manager in managers]
+
+        if managers_ids:
+            await notify_managers_about_new_candidate(bot, candidate, managers_ids)
+
         await state.clear()
         await message.answer(
                 f"Спасибо, {candidate.first_name}!\n\n"

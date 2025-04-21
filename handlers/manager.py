@@ -2,6 +2,7 @@
 Обработчики для команд менеджера/рекрутера.
 """
 import math
+
 from aiogram import Router, F
 from aiogram.types import (
         Message, 
@@ -16,6 +17,7 @@ from keyboards.manager_kb import (
     get_candidate_actions_keyboard,
     get_pagination_keyboard
 )
+
 from db import get_session
 from utils.access import ManagerFilter
 from services.candidate import (

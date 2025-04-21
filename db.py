@@ -28,5 +28,8 @@ async def get_session() -> AsyncSession:
 
     Используется как зависимость или утилита для запросов к базе.
     """
-    async with async_session() as session:
-        yield session
+    session = async_session()
+    try:
+        return session
+    finally:
+        await session.close()

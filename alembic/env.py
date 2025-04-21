@@ -62,8 +62,6 @@ def run_migrations_offline() -> None:
 def do_run_migrations(connection):
     """
     Конфигурирует Alembic и запускает миграции в текущем соединении.
-
-    Используется внутри асинхронного подключения через run_sync().
     """
     context.configure(connection=connection, target_metadata=target_metadata)
     

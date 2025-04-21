@@ -22,6 +22,21 @@ class WorkShift(str, enum.Enum):
     night = "night"
 
 
+class CandidateStatus(str, enum.Enum):
+    """
+    Перечисление статусов заявки кандидата
+
+    Значение:
+    - "new" - новая заявка
+    - "approved" - принят
+    - "rejected" - отклонен
+    """
+
+    new = "new"
+    approved = "approved"
+    rejected = "rejected"
+
+
 class Candidate(Base):
     """
     Модель для хранения анкеты кандидата.
@@ -61,4 +76,41 @@ class Candidate(Base):
     motivation: Mapped[str] = mapped_column(
             Text, nullable=True, doc="Причина, почему хочет работать"
             )
+    status: Mapped[CandidateStatus] = mapped_column(
+            Enum(CandidateStatus), nullable=False,
+            default=CandidateStatus.new, doc="Статус заявки кандидата"
+            )
+
+
+class ManagerRole(str, enum.Enum):
+    """
+    Перечисление ролей пользователей.
+
+    Значения:
+        - "admin" - управляет менеджерами
+        - "manager" - может просматривать и обрабатывать акнкеты
+    """
+    admin = "admin"
+    manager = "manager"
+
+
+class Manager(Base):
+    """
+    Модель для хранения информации о менеджерах.
+    """
+    __tablename__ = "managers"
+
+    id: Mapped[int] = mapped_column(
+            Integer, primary_key=True, autoincrement=True
+            )
+    telegram_id: Mapped[int] = mapped_column(
+            Integer, unique=True, nullable=False, doc="Telegram ID менеджера"
+            )
+    first_name: Mapped[str] = mapped_column(
+            String(64), nullable=False, doc="Имя менеджера"
+            )
+    last_name: Mapped[str] = mapped_column(
+            String(64), nullable=False, doc="Фамилия менеджера"
+            )
+
 

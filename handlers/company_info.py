@@ -17,7 +17,7 @@ async def process_about_job(callback: CallbackQuery) -> None:
     """
     await callback.answer()
     await callback.message.edit_text(
-            "О работе в сети кофеен \"Кофемашина\":\n\n"
+            "О работе в сети кофеен \"Название\":\n\n"
             "Что вас интересует?",
             reply_markup=get_about_job_keyboard()
             )
@@ -30,7 +30,7 @@ async def process_about_us(callback: CallbackQuery) -> None:
     """
     await callback.answer()
     await callback.message.edit_text(
-            "О сети кофеен \"Кофемашина\":\n\n"
+            "О сети кофеен \"Название\":\n\n"
             "инфа о кофейне",
             reply_markup=get_return_to_job_info_keyboard()
             )
@@ -69,8 +69,8 @@ async def process_official_job(callback: CallbackQuery) -> None:
     """
     await callback.answer()
     await callback.message.edit_text(
-            "Официальное трудоустройство в \"Кофемашине\":\n\n"
-            "• Оформление по ТК РФ\n",
+            "Официальное трудоустройство в \"Название\":\n\n"
+            "Оформление по ТК РФ\n",
             reply_markup=get_return_to_job_info_keyboard()
             )
 
@@ -95,7 +95,7 @@ async def process_return_to_job_info(callback: CallbackQuery) -> None:
     """
     await callback.answer()
     await callback.message.edit_text(
-            "О работе в сети кофеен \"Кофемашина\":\n\n"
+            "О работе в сети кофеен \"Название\":\n\n"
             "Что вас интересует?",
             reply_markup=get_about_job_keyboard()
             )

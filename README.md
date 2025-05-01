@@ -66,8 +66,7 @@ bot/
 
 1. Клонировать репозиторий:
 ```bash
-git clone https://github.com/Dialol/bot_telegram
-cd hiring-bot
+git clone https://github.com/Dialol/telegram_bot_hr
 ```
 
 2. Создать виртуальное окружение:
